@@ -1,0 +1,9 @@
+<footer class="footer bg-dark px-3 py-3">
+    <div class="d-flex justify-content-end align-content-center">
+        <p class="text-white mb-0">
+            Server status:
+            <span *ngIf="wsService.connected" class="text-success">Online</span>
+            <span *ngIf="!wsService.connected" class="text-danger">Offline</span>
+        </p>
+    </div>
+</footer>

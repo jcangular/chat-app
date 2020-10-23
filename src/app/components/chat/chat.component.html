@@ -1,0 +1,12 @@
+<h1>Mensajes</h1>
+
+<div class="border rounded shadow-sm" id="chatMessages">
+    <li class="list-group-item" *ngFor="let m of messages">
+        {{m.from}}> {{m.message}}
+    </li>
+</div>
+
+<form class="mt-3" (ngSubmit)="sendMessage()">
+    <input class="form-control" type="text" [(ngModel)]="message" name="message" autofocus autocomplete="off"
+        placeholder="Mensaje...">
+</form>
