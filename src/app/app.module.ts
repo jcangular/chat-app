@@ -25,8 +25,8 @@ const config: SocketIoConfig = { url: environment.wsURL, options: {} };
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         FormsModule,
+        AppRoutingModule,
         SocketIoModule.forRoot(config)
     ],
     providers: [],

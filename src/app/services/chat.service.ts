@@ -13,7 +13,7 @@ export class ChatService {
     public sendMessage(message: string): void {
         if (!message || message.length <= 0) { return; }
         const data = {
-            from: 'jcpalma',
+            from: this.wsService.user.name,
             message
         };
         this.wsService.emit('message', data);
