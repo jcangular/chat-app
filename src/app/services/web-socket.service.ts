@@ -10,20 +10,23 @@ export class WebSocketService {
 
     public connected = false;
     public user: User = null;
+    public logined = false;
 
     constructor(private socket: Socket) {
-        this.loadUser();
         this.initStatus();
+        this.loadUser();
     }
 
-    private initStatus(): void {
+    private async initStatus(): Promise<void> {
         this.socket.on('connect', () => {
+            if (sessionStorage.getItem('user')) {
+                const u = JSON.parse(sessionStorage.getItem('user'));
+                this.login(u.name);
+            }
             this.connected = true;
-            console.log('¡Conectado al servidor!');
         });
         this.socket.on('disconnect', () => {
             this.connected = false;
-            console.log('Desconectado del servidor!');
         });
     }
 
@@ -54,6 +57,7 @@ export class WebSocketService {
             this.emit('loginUser', { name }, resp => {
                 this.user = new User(name);
                 this.saveUser();
+                this.logined = true;
                 resolve(resp);
             });
         });
@@ -64,7 +68,7 @@ export class WebSocketService {
     }
 
     loadUser(): void {
-        if (sessionStorage.getItem('user')) {
+        if (this.connected && sessionStorage.getItem('user')) {
             this.user = JSON.parse(sessionStorage.getItem('user'));
             this.login(this.user.name);
         }

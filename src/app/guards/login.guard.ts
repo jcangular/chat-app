@@ -14,7 +14,7 @@ export class LoginGuard implements CanActivate {
     ) { }
 
     canActivate(): boolean {
-        if (this.wsService.user) {
+        if (sessionStorage.getItem('user')) {
             return true;
         } else {
             this.router.navigateByUrl('/');
