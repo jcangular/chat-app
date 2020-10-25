@@ -26,4 +26,8 @@ export class ChatService {
     public getPrivateMessages(): Observable<any> {
         return this.wsService.listen('privateMessages');
     }
+
+    public getConnectedUsers(): Observable<any> {
+        return this.wsService.listen('connectedUsers');
+    }
 }

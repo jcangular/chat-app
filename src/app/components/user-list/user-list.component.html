@@ -1,1 +1,10 @@
-<p>user-list works!</p>
+<h3 class="mt-4">Usuarios</h3>
+<div class="list-group list-user">
+    <a *ngFor="let u of usuarios | async" class="list-group-item list-group-item-action list-user-item text-break"
+        (click)="sendPrivateMessage(u)">
+        {{u.name}}
+        <small class="badge badge-pill badge-success">{{u.room || 'General'}}</small>
+        <br>
+        <small class="badge badge-dark text-break">{{u.id}}</small>
+    </a>
+</div>
