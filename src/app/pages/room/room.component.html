@@ -1,18 +1,28 @@
-<main class="container">
+<div class="container-fluid">
 
-    <h1>
-        Usuario: <small>{{ wsService.user?.name }}</small>
-    </h1>
+    <section class="d-flex flex-row justify-content-between">
+        <article class="align-self-center">
+            <h1>
+                Usuario: <small>{{ wsService.user?.name }}</small>
+            </h1>
+        </article>
+        <article class="align-self-center">
+            <button class="btn btn-danger" (click)="wsService.logout()">
+                <i class="fa fa-sign-out"></i>
+                Salir
+            </button>
+        </article>
+    </section>
+
     <hr>
 
     <div class="row">
-        <div class="col-5">
+        <div class="col-12 col-md-5">
             <app-user-list></app-user-list>
         </div>
-        <div class="col-7">
+        <div class="col-12 col-md-7">
             <app-chat></app-chat>
         </div>
     </div>
-</main>
 
-<app-footer></app-footer>
+</div>
