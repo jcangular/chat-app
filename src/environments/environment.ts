@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    wsURL: 'http://localhost:3010'
+    wsURL: 'http://192.168.0.2:3010'
 };
