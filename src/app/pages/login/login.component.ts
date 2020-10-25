@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        // Limpia el usuario del storage.
+        this.wsService.logout();
     }
 
     public login(): void {

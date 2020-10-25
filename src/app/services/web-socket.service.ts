@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { User } from '../classes/user';
@@ -12,7 +13,10 @@ export class WebSocketService {
     public user: User = null;
     public logined = false;
 
-    constructor(private socket: Socket) {
+    constructor(
+        private socket: Socket,
+        private router: Router
+    ) {
         this.initStatus();
         this.loadUser();
     }
@@ -53,14 +57,22 @@ export class WebSocketService {
      * @param name El nombre del usuario.
      */
     public login(name: string): Promise<any> {
+        name = name.trim();
         return new Promise((resolve, reject) => {
-            this.emit('loginUser', { name }, resp => {
+            this.emit('config-user', { name }, resp => {
                 this.user = new User(name);
                 this.saveUser();
                 this.logined = true;
                 resolve(resp);
             });
         });
+    }
+
+    public logout(): void {
+        this.user = null;
+        sessionStorage.removeItem('user');
+        this.emit('config-user', { name: '' }, resp => { });
+        this.router.navigateByUrl('/');
     }
 
     saveUser(): void {
